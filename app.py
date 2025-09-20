@@ -205,15 +205,6 @@ header = html.Header(
     style={"backgroundColor": "white"},
 )
 
-navbar = dbc.Nav(
-    [
-        dbc.NavLink("Dashboard", href="#", active=True, className="nav-link-custom"),
-    ],
-    pills=True,
-    fill=True,
-    className="mt-2 mb-4",
-    style={"backgroundColor": "white", "borderBottom": "1px solid #333"},
-)
 
 # Panel de filtros (acordeón)
 filters_card = dbc.Card(
