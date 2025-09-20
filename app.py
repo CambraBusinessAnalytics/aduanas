@@ -680,6 +680,18 @@ def update_kpis(**kwargs):
         f"{avg_weight_tons:,.0f}",
         (str(top_port)[:20] + "...") if len(str(top_port)) > 20 else str(top_port),
     ]
+
+
+
+# --- Ranking por Valor ---
+@callback(
+    [Output("ranking_graph", "figure"), Output("ranking_error", "children")],
+    {
+        "top_n": Input("ranking_top_n", "value"),
+        "sort_order": Input("ranking_sort_order", "value"),
+        **FILTER_CALLBACK_INPUTS,
+    },
+)
 def update_ranking(top_n, sort_order, **filters) -> Tuple[go.Figure, str]:
     empty = go.Figure()
     try:
