@@ -627,6 +627,25 @@ app.layout = html.Div(
             ],
             fluid=True,
         ),
+        html.Div([
+        html.P(
+            "Realizado por Cambra Business Analytics. // Contacto: +595 0985 705586 // www.cambraconsultoria.com.py // email: cambraconsultoria@gmail.com",
+            style={
+                'font-family': 'Cambria, serif',
+                'font-style': 'italic',
+                'text-align': 'center',
+                'color': 'white',
+                'background-color': 'black',
+                'margin-top': '20px',
+                'width': '80%',
+                'margin-left': 'auto',
+                'margin-right': 'auto',
+                'padding': '10px',
+                'line-height': '1.5',
+                'font-size': '14px'
+            }
+        ),
+    ])
     ]
 )
 
