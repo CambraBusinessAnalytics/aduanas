@@ -605,7 +605,6 @@ table_card = dbc.Card(
 app.layout = html.Div(
     [
         header,
-        navbar,
         dbc.Container(
             [
                 filters_card,
