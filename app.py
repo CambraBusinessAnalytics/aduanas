@@ -653,10 +653,10 @@ def display_count(**kwargs):
 
 @callback(
     [
-        Output("total_ports_card", "value"),
-        Output("total_weight_card", "value"),
-        Output("avg_weight_card", "value"),
-        Output("top_port_card", "value"),
+        Output("total_ports_card", "children"),
+        Output("total_weight_card", "children"),
+        Output("avg_weight_card", "children"),
+        Output("top_port_card", "children"),
     ],
     FILTER_CALLBACK_INPUTS,
 )
@@ -668,7 +668,11 @@ def update_kpis(**kwargs):
     total_ports = len(df)
     total_weight_tons = df["kilo_neto"].sum() / 1000.0
     avg_weight_tons = (total_weight_tons / total_ports) if total_ports > 0 else 0
-    top_port = df.loc[df["kilo_neto"].idxmax(), "ADUANA"] if "kilo_neto" in df and not df["kilo_neto"].isna().all() else "—"
+    top_port = (
+        df.loc[df["kilo_neto"].idxmax(), "ADUANA"]
+        if "kilo_neto" in df and not df["kilo_neto"].isna().all()
+        else "—"
+    )
 
     return [
         f"{total_ports:,}",
@@ -676,17 +680,6 @@ def update_kpis(**kwargs):
         f"{avg_weight_tons:,.0f}",
         (str(top_port)[:20] + "...") if len(str(top_port)) > 20 else str(top_port),
     ]
-
-
-# --- Ranking por Valor ---
-@callback(
-    [Output("ranking_graph", "figure"), Output("ranking_error", "children")],
-    {
-        "top_n": Input("ranking_top_n", "value"),
-        "sort_order": Input("ranking_sort_order", "value"),
-        **FILTER_CALLBACK_INPUTS,
-    },
-)
 def update_ranking(top_n, sort_order, **filters) -> Tuple[go.Figure, str]:
     empty = go.Figure()
     try:
