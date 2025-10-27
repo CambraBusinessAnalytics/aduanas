@@ -173,7 +173,7 @@ header = html.Header(
                         [
                             dbc.Col(
                                 html.Img(
-                                    src="/assets/CAMBRA.png",
+                                    src="/assets/santa_monica.jpg",
                                     style={"height": "80px", "width": "auto"},
                                 ),
                                 width="auto",
