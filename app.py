@@ -173,7 +173,7 @@ header = html.Header(
                         [
                             dbc.Col(
                                 html.Img(
-                                    src="/assets/santa_monica.jpg",
+                                    src="/assets/CAMBRA.png",
                                     style={"height": "80px", "width": "auto"},
                                 ),
                                 width="auto",
@@ -883,11 +883,15 @@ def update_radar(ports, normalize, **filters) -> Tuple[go.Figure, str]:
 
         norm_on = isinstance(normalize, list) and ("enabled" in normalize)
         plot_cols = []
+        
         if norm_on:
             for m in metrics:
                 col = f"{m}_norm"
-                lo, hi = pm[m].min(), pm[m].max()
-                pm[col] = 1.0 if lo == hi else (pm[m] - lo) / (hi - lo)
+                hi = pm[m].max()
+                if hi == 0 or pd.isna(hi):
+                    pm[col] = 0.0
+                else:
+                    pm[col] = pm[m] / hi
                 plot_cols.append(col)
         else:
             plot_cols = metrics
